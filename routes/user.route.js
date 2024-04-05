@@ -1,6 +1,6 @@
-const {create, find} = require("../controllers/user.controller.js")
+const {create, login} = require("../controllers/user.controller.js")
 
 module.exports = app => {
-	app.get("/api/user/create/:username/:password", create)
-
+	app.post("/api/v1/user/register/:username/:password", create)
+	app.post("/api/v1/user/login/:username/:password", login)
 }
