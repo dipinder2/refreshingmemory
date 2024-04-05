@@ -4,16 +4,15 @@ const jwt = require("jsonwebtoken")
 const Cookies = require("js-cookie")
 const UserControllerFunctions = {
 	create : async function(req,res){
+				console.log(req.params)
 		await hash_password(req.params.password).then(hash=>{
 			User.create({...req.params, password:hash}).then(user =>{
-				console.log(user)
 				const token = jwt.sign({_id:user._id}, process.env.SECRET_KEY_JWT_TOKEN)
-				res.cookie('usertoken', token).send(user)
+				res.cookie('usertoken', token).send(token)
 
 				//res.redirect("/api/user/login")
 				}).catch(err=>{
-					//console.log(typeof(err.message))
-					console.log("catching error")
+					console.log(err.message)
 					res.send(JSON.parse(err.message))
 				})
 		})

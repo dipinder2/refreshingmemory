@@ -9,22 +9,22 @@ const UserSchema = new mongoose.Schema({
 
 
 
-try{
-	UserSchema.pre('validate', function(next){
-		let errs = {}
-		if(this.username.length<6){
-			errs = {...errs,"username":"username is too short!"}
-		}
-		if(errs.length>0){
-			console.log(errs)
-			return next(new Error(JSON.stringify(errs)))
-		}
-		next()
-	})
 
-}catch(err){
-	console.log(err)
-}
+UserSchema.pre('validate', function(next){
+	let errs = {"username":""}
+	console.log("Validating")
+	if(this.username.length<6){
+		console.log("length is short")
+		errs = {...errs,"username":"username is too short!"}
+	}
+	if(errs["username"] != ""){
+		console.log(errs)
+		return next(new Error(JSON.stringify(errs)))
+	}
+
+	next()
+})
+
 
 const User =  mongoose.model('User', UserSchema)
 
