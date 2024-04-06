@@ -18,13 +18,13 @@ UserSchema.pre('validate', function(next){
 		errs = {...errs,"username":"username is too short!"}
 	}
 	if(errs["username"] != ""){
-		console.log(errs)
+		console.error(errs);
 		return next(new Error(JSON.stringify(errs)))
 	}
-
 	next()
 })
 
+	
 
 const User =  mongoose.model('User', UserSchema)
 
@@ -35,3 +35,4 @@ const User =  mongoose.model('User', UserSchema)
 // }, 'Username is not unique!')
 
 module.exports.User = User
+

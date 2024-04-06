@@ -17,7 +17,9 @@ const PORT = 8000
 //Requests will go thru middlwares and all the configs will happen here
 const config = require("./configs/mongoose.config.js")
 const routesmiddleware = require("./middlewares/user.middleware.js")(router)
-const routes = require("./routes/user.route.js")(app)
+const userroutes = require("./routes/user.route.js")(app)
+const cartroutes = require("./routes/cart.route.js")(app)
+
 
 app.use(router)
 app.use(express.json(), express.urlencoded({ extended: true }));
